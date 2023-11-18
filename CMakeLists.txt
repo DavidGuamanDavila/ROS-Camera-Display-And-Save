@@ -10,7 +10,14 @@ project(camera_display_and_save_pkg)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
+  rospy
+  std_msgs
+  cv_bridge
+  image_transport
 )
+
+find_package(OpenCV REQUIRED)
+catkin_package()
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -117,6 +124,7 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -171,6 +179,9 @@ add_dependencies(image_visualizer_and_saver ${catkin_EXPORTED_TARGETS} ${${PROJE
 # install(TARGETS ${PROJECT_NAME}_node
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
+install(TARGETS image_visualizer
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark libraries for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html
